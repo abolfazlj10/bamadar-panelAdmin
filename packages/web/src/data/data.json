@@ -1,0 +1,32 @@
+{
+  "Access":[
+    {
+      "title": "طلاوان",
+      "link": "http://talaavan.com/",
+      "icon": "talavan",
+      "description": "دسترسی به پنل مدیریت وب‌سایت طلاوان.",
+      "color": "#00b8d4"
+    },
+    {
+      "title": "فروشگاه",
+      "link": "https://bamadar.com/",
+      "icon": "onlineShop",
+      "description": "مدیریت محصولات، سفارشات و موجودی فروشگاه.",
+      "color": "#43a047"
+    },
+    {
+      "title": "غذای آنلاین",
+      "icon": "foodcurt",
+      "link": "https://food.bamadar.com/",
+      "description": "مدیریت سفارشات و رستوران‌های غذای آنلاین.",
+      "color": "#ffc107"
+    },
+    {
+      "title": "صندوق قرض الحسنه",
+      "icon": "loanmom",
+      "link": "https://madarfund.bamadar.com/login",
+      "description": "مدیریت وام‌ها و حساب‌های صندوق قرض الحسنه.",
+      "color": "#9c27b0"
+    }
+  ]
+}

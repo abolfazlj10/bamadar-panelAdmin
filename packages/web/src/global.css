@@ -1,0 +1,19 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'iranYekan';
+    src: url('/fonts/IRANYekanX-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    direction: rtl;
+    @apply font-iranYekan text-gray/08;
+}
+.Toastify__toast{
+    @apply !font-iranYekan;
+}

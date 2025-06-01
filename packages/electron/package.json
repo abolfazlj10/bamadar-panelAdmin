@@ -1,0 +1,60 @@
+{
+  "name": "@monorepo/electron",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Admins Madar App",
+  "author": "abolfazl.j.dev@gmail.com",
+  "main": "main.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development concurrently \"cd ../web && yarn dev\" \"electron .\"",
+    "build": "cross-env NODE_ENV=production electron-builder",
+    "build:win": "cross-env NODE_ENV=production electron-builder --win",
+    "build:mac": "cross-env NODE_ENV=production electron-builder --mac",
+    "build:all": "cd ../web && yarn build && cd ../electron && yarn build:win"
+  },
+  "dependencies": {
+    "@monorepo/web": "1.0.0",
+    "dotenv": "^16.5.0",
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "dmg-builder": "26.0.12",
+    "electron": "36.2.1",
+    "electron-builder": "^26.0.12",
+    "electron-builder-squirrel-windows": "26.0.12"
+  },
+  "build": {
+    "appId": "com.madar.admin",
+    "productName": "Madar Admin",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      {
+        "from": "../web/dist",
+        "to": "public",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "public/logos/madar.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "public/logos/madar.icns"
+    }
+  }
+}
