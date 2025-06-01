@@ -19,7 +19,7 @@ export default function Wrapper () {
                     <div className="overflow-hidden grow">
                         {
                             
-                            <iframe className="w-full h-full" src={wrapperData.url}></iframe>
+                            <iframe className="w-full h-full z-10" src={wrapperData.url}></iframe>
                         }
                     </div>
                 </>

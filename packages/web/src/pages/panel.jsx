@@ -21,7 +21,7 @@ export default function Panel () {
     const [token] = useState(localStorage.getItem('access_token'))
 
     const goToWrapper = () => {
-        setWrapperData({url:`https://testautomation.madarnet.net?t=${token}`,title:'ثبت مرخصی',logo:'static'})
+        setWrapperData({url:`https://testautomation.madarnet.net?t=${token}`,title:'ثبت مرخصی'})
         navigate('/wrapper')
     }
 
@@ -42,6 +42,10 @@ export default function Panel () {
             getData()
         }
     },[userData])
+
+    useEffect(()=>{
+        setWrapperData(null)
+    },[])
 
     return(
         <>
