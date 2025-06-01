@@ -20,7 +20,6 @@ export default function AccessCard ({data,id}) {
             </div>
             <div className="flex flex-col gap-5 justify-center">
                 <div className="font-bold text-2xl">{data.title}</div>
-                <div className="bg-abolfazlColor">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </div>
             </div>
             <div className="flex justify-center items-center">
                 <button onClick={goToWrapper} className="flex items-center justify-center gap-5 text-2xl w-full py-5 rounded-xl cursor-pointer border border-black/10 duration-100 bg-blue-600 text-white">
