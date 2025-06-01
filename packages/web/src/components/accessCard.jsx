@@ -17,7 +17,7 @@ export default function AccessCard ({data,id}) {
                     <motion.img 
                         layoutId={`icon-${data.id}`} 
                         className="w-full object-contain z-[99]" 
-                        src={`https://basesuperapp.bamadar.com/v1/media/${data.image}`}
+                        src={ data.title === 'میزیتو' ? `/logos/mizito.webp` : `https://basesuperapp.bamadar.com/v1/media/${data.image}`}
                         transition={{ 
                             type: "spring",
                             stiffness: 300,

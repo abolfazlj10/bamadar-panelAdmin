@@ -10,8 +10,6 @@ import { RxExternalLink } from "react-icons/rx";
 import { AiOutlineEdit } from "react-icons/ai";
 import Header from "../components/header";
 import { BiSupport } from "react-icons/bi";
-import { GoQuestion } from "react-icons/go";
-import {HoverCard, HoverCardContent, HoverCardTrigger,} from "../components/ui/hoverCard"
 
 
 export default function Panel () {
@@ -20,8 +18,9 @@ export default function Panel () {
     const navigate = useNavigate()
     const [token] = useState(localStorage.getItem('access_token'))
 
-    const goToWrapper = () => {
-        setWrapperData({url:`https://testautomation.madarnet.net?t=${token}`,title:'ثبت مرخصی'})
+    const goToWrapper = (type) => {
+        console.log({url:`https://testautomation.madarnet.net/panel/${type}?t=${token}`,title:type == 'leave' ? 'ثبت مرخصی' : 'گزارش ترددها'})
+        setWrapperData({url:`https://testautomation.madarnet.net/panel/${type}?t=${token}`,title:type == 'leave' ? 'ثبت مرخصی' : 'گزارش ترددها'})
         navigate('/wrapper')
     }
 
@@ -73,7 +72,7 @@ export default function Panel () {
                                             <AccordionTrigger className="text-lg rounded-lg hover:no-underline">
                                                 <div className="flex items-center gap-2">
                                                     <AiOutlineEdit className="text-xl" />
-                                                    <div>ثبت مرخصی</div>
+                                                    <div>درخواست مرخصی</div>
                                                 </div>
                                             </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-10">
@@ -87,8 +86,8 @@ export default function Panel () {
                                                         <span>{countLeave.leaveUsed / 60 / 8}</span>
                                                     </div>
                                                 </div>
-                                                <Button onClick={goToWrapper} className="border py-8 text-xl bg-blue-500 text-white w-full rounded-xl" variant="destructive">
-                                                    <div>ثبت مرخصی</div>
+                                                <Button onClick={() => goToWrapper('requests')} className="border py-8 text-xl bg-blue-500 text-white w-full rounded-xl" variant="destructive">
+                                                    <div>درخواست مرخصی</div>
                                                     <RxExternalLink className="text-2xl" />
                                                 </Button>
                                             </AccordionContent>
@@ -100,9 +99,7 @@ export default function Panel () {
                             <div className="flex flex-col gap-2">
                                 <div className="text-2xl font-bold">لینک ها</div>
                                 <div className="flex flex-col gap-5 mr-2">
-                                    {["","",""].map((item,index)=>(
-                                        <a href="https://bamadar.com/" target="_blank" key={index} className="flex items-center text-xl gap-3 border py-5 px-4 rounded-xl hover:bg-[#F9FAFB]"><BiSupport /> <div>پشتیبانی</div></a>
-                                    ))}
+                                    <div onClick={() => goToWrapper('attendance')} className="flex items-center text-xl gap-3 border py-5 px-4 rounded-xl hover:bg-[#F9FAFB] cursor-pointer"><BiSupport /> <div>گزارش ترددها </div></div>
                                 </div>
                             </div>
                         </div>
@@ -113,27 +110,19 @@ export default function Panel () {
                         </Button>
                     </div>
                     <div className="bg-[#fff] rounded-2xl shadow-xl p-5 ml-5 mb-5 overflow-y-auto
-                      [&::-webkit-scrollbar]:w-2
-                      [&::-webkit-scrollbar]:rounded-full
-                    [&::-webkit-scrollbar-track]:bg-blue-500/10
-                    [&::-webkit-scrollbar-track]:rounded-full
-                    [&::-webkit-scrollbar-thumb]:bg-blue-500/50
-                    [&::-webkit-scrollbar-thumb]:rounded-full
-                    [&::-webkit-scrollbar-thumb]:hover:bg-blue-500/70
-                    [&::-webkit-scrollbar-thumb]:hover:cursor-grab
-                    [&::-webkit-scrollbar-thumb]:active:cursor-grabbing
+                        [&::-webkit-scrollbar]:w-2
+                        [&::-webkit-scrollbar]:rounded-full
+                        [&::-webkit-scrollbar-track]:bg-blue-500/10
+                        [&::-webkit-scrollbar-track]:rounded-full
+                        [&::-webkit-scrollbar-thumb]:bg-blue-500/50
+                        [&::-webkit-scrollbar-thumb]:rounded-full
+                        [&::-webkit-scrollbar-thumb]:hover:bg-blue-500/70
+                        [&::-webkit-scrollbar-thumb]:hover:cursor-grab
+                        [&::-webkit-scrollbar-thumb]:active:cursor-grabbing
                     ">
                         {/* left cards for usage admin */}
                         <div className="flex justify-between">
                             <div className="text-3xl border-b pb-3 border-blue-500/30">دسترسی ها</div>
-                            <HoverCard>
-                                <HoverCardTrigger>
-                                    <GoQuestion className="text-3xl cursor-pointer hover:text-blue-500 duration-100" /> 
-                                </HoverCardTrigger>
-                                <HoverCardContent side="right" className="backdrop-blur-sm">
-                                    در این قسمت سایت هایی که در دسترس شما هستند نمایش داده میشود.
-                                </HoverCardContent>
-                            </HoverCard>
                         </div>
                         <div className="p-5 grid grid-cols-3 gap-y-8 justify-items-center mt-5 max-[2476px]:grid-cols-2 max-[1844px]:grid-cols-1">
                             {access && access.map((element,key)=>(

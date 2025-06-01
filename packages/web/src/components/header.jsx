@@ -1,5 +1,6 @@
 import { useAppContext } from "../context/appContext";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function Header () {
     const {userData,wrapperData,setWrapperData} = useAppContext()
@@ -42,7 +43,7 @@ export default function Header () {
                     <motion.img 
                         layoutId={`icon-${wrapperData?.id}`}
                         className="max-h-[70px] object-contain z-[99]" 
-                        src={`https://basesuperapp.bamadar.com/v1/media/${wrapperData?.image}`}
+                        src={wrapperData.title === 'میزیتو' ? `/logos/mizito.webp` : `https://basesuperapp.bamadar.com/v1/media/${wrapperData?.image}`}
                         transition={{ 
                             type: "spring",
                             stiffness: 300,

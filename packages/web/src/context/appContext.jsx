@@ -71,7 +71,10 @@ export const AppProvider = ({children}) => {
             }
         })
         const res = await req.json()
-        setAccess(res.data)
+        setAccess([...res.data,
+            {id:res.data.length + 1,title:'اتوماسیون',url:'https://bamadar.com',image:"automation/H-pYqf_ABBziAgC0JprPHACx-fRDt6-USSh9C73hPm7u_QjN.webp"},
+            {id:res.data.length + 2,title:'میزیتو',url:'https://www.mizito.ir/',image:'https://office.mizito.ir/assets/img/mizito.svg'}
+        ])
     }
 
     useEffect(()=>{
@@ -80,7 +83,7 @@ export const AppProvider = ({children}) => {
         }
         asyncFunction()
     },[])
-
+    
     useEffect(()=>{
         const asyncFunction = async () => {
             if(userData){
