@@ -9,7 +9,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "../
 import { RxExternalLink } from "react-icons/rx";
 import { AiOutlineEdit } from "react-icons/ai";
 import Header from "../components/header";
-import { BiSupport } from "react-icons/bi";
+import { FiPercent } from "react-icons/fi";
+import { TbReportSearch } from "react-icons/tb";
+import { HiOutlineNewspaper } from "react-icons/hi2";
 
 
 export default function Panel () {
@@ -18,8 +20,8 @@ export default function Panel () {
     const navigate = useNavigate()
     const [token] = useState(localStorage.getItem('access_token'))
 
+
     const goToWrapper = (type) => {
-        console.log({url:`https://testautomation.madarnet.net/panel/${type}?t=${token}`,title:type == 'leave' ? 'ثبت مرخصی' : 'گزارش ترددها'})
         setWrapperData({url:`https://testautomation.madarnet.net/panel/${type}?t=${token}`,title:type == 'leave' ? 'ثبت مرخصی' : 'گزارش ترددها'})
         navigate('/wrapper')
     }
@@ -59,7 +61,7 @@ export default function Panel () {
                                 <div className="w-36 h-36 bg-white rounded-full flex items-center justify-center text-blue-700 font-bold text-[50px] ml-4 flex-shrink-0 ring-2 ring-white ring-offset-2 ring-offset-blue-500"><PiUserLight /></div>
                             )}
                             <div className="text-2xl font-extrabold text-white">{`${userData?.user?.firstName} ${userData?.user?.lastName}`}</div>
-                            <div className="text-white">{`شناسه کاربری : ${userData?.user?.id}`}</div>
+                            <div className="text-white">{`سمت : ${userData?.user?.role}`}</div>
                         </div>
 
                         {/* right boxes to options admin */}
@@ -67,23 +69,46 @@ export default function Panel () {
                             <div className="flex flex-col gap-3">
                                 <div className="text-2xl font-bold">خدمات</div>
                                 <Accordion className="flex flex-col gap-2 mr-1" collapsible>
-                                    {[""].map((item,index)=>(
-                                        <AccordionItem className="rounded-xl flex flex-col gap-5 border px-6 py-2 duration-100 data-[state=open]:hover:bg-[#fff] hover:bg-[#F9FAFB] hover:text-black data-[state=open]:border-blue-500" key={index} value={`item-${index}`}>
+                                        <AccordionItem className="rounded-xl flex flex-col gap-5 border px-6 py-2 duration-100 data-[state=open]:hover:bg-[#fff] hover:bg-[#F9FAFB] hover:text-black data-[state=open]:border-blue-500" value="item-1">
                                             <AccordionTrigger className="text-lg rounded-lg hover:no-underline">
                                                 <div className="flex items-center gap-2">
-                                                    <AiOutlineEdit className="text-xl" />
+                                                    <HiOutlineNewspaper className="text-xl" />
                                                     <div>درخواست مرخصی</div>
                                                 </div>
                                             </AccordionTrigger>
-                                            <AccordionContent className="flex flex-col gap-10">
-                                                <div className="flex justify-between text-[20px]">
-                                                    <div className="flex">
-                                                        <span>کل مرخصی ها:</span>
-                                                        <span>{countLeave.leaveLeft / 60 / 8}</span>
+                                            <AccordionContent className="flex flex-col gap-10 text-black">
+                                                <div className="flex flex-col items-center gap-5 text-[20px]">
+                                                    <div className="relative size-[250px] mt-5">
+                                                        <div className="absolute inset-0 rounded-full blur-md opacity-25 bg-[#10b981]"></div>
+                                                        <svg className="size-full -rotate-90 rounded-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">                                                        
+                                                            <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-white" strokeWidth="2.8"></circle>                                                            
+                                                            <circle 
+                                                                cx="18" 
+                                                                cy="18" 
+                                                                r="16" 
+                                                                fill="none" 
+                                                                className="stroke-current text-[#62cbaa]" 
+                                                                strokeWidth="2.8" 
+                                                                strokeDasharray="100.53" 
+                                                                strokeDashoffset={`${100.53 - ((countLeave.leaveUsed / (countLeave.leaveUsed + countLeave.leaveLeft)) * 100.53)}` || "100.53"} 
+                                                                strokeLinecap="round"
+                                                            ></circle>
+                                                        </svg>
+                                                        <div className="absolute top-0 w-full h-full flex flex-col items-center justify-center gap-3">
+                                                            <span className="text-center text-[40px] font-bold flex items-center"><FiPercent />{Math.round((countLeave.leaveUsed / (countLeave.leaveUsed + countLeave.leaveLeft)) * 100) || 0}</span>
+                                                            <span className="text-center text-xs text-gray-500">استفاده شده</span>
+                                                        </div>
                                                     </div>
-                                                    <div className="flex">
-                                                        <span>استفاده شده:</span>
-                                                        <span>{countLeave.leaveUsed / 60 / 8}</span>
+                                                    <div>میزان مصرف مرخصی</div>
+                                                    <div className="flex w-full justify-between gap-2 text-sm">
+                                                        <div className="flex flex-col items-center gap-3">
+                                                            <div className="w-10 h-10 flex items-center justify-center bg-amber-100 text-amber-700 rounded-full">{countLeave.leaveUsed}</div>
+                                                            <div className="text-gray-500">استفاده شده</div>
+                                                        </div>
+                                                        <div className="flex flex-col items-center gap-3">
+                                                            <div className="w-10 h-10 flex items-center justify-center bg-green-100 text-green-700 rounded-full">{countLeave.leaveLeft}</div>
+                                                            <div className="text-gray-500">باقی مانده</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <Button onClick={() => goToWrapper('requests')} className="border py-8 text-xl bg-blue-500 text-white w-full rounded-xl" variant="destructive">
@@ -92,14 +117,12 @@ export default function Panel () {
                                                 </Button>
                                             </AccordionContent>
                                         </AccordionItem>
-                                    ))
-                                    }
                                 </Accordion>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="text-2xl font-bold">لینک ها</div>
                                 <div className="flex flex-col gap-5 mr-2">
-                                    <div onClick={() => goToWrapper('attendance')} className="flex items-center text-xl gap-3 border py-5 px-4 rounded-xl hover:bg-[#F9FAFB] cursor-pointer"><BiSupport /> <div>گزارش ترددها </div></div>
+                                    <div onClick={() => goToWrapper('attendance')} className="flex items-center text-xl gap-3 border py-5 px-4 rounded-xl hover:bg-[#F9FAFB] cursor-pointer"><TbReportSearch /> <div>گزارش ترددها </div></div>
                                 </div>
                             </div>
                         </div>

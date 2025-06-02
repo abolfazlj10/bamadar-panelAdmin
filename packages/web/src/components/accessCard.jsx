@@ -30,7 +30,7 @@ export default function AccessCard ({data,id}) {
                 <div className="font-bold text-2xl">{data.title}</div>
             </div>
             <div className="flex justify-center items-center">
-                <button onClick={goToWrapper} className="flex items-center justify-center text-2xl w-full py-5 rounded-xl cursor-pointer border border-black/10 duration-100 bg-blue-600 text-white">
+                <button onClick={goToWrapper} className="flex items-center justify-center text-2xl w-full py-5 rounded-xl cursor-pointer duration-100 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
                     ورود به پنل مدیریت
                 </button>
             </div>

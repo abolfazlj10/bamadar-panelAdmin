@@ -60,7 +60,11 @@ export const AppProvider = ({children}) => {
             }
         })
         const res = await req.json()
-        setCountLeave(res.data)
+        const counts = {
+            leaveUsed: res.data.leaveUsed / 60 / 8,
+            leaveLeft: res.data.leaveLeft / 60 / 8,
+        }
+        setCountLeave(counts)
     }
 
     const getUserRoots = async () => {
