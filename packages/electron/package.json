@@ -1,6 +1,6 @@
 {
   "name": "@monorepo/electron",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "Admins Madar App",
   "author": "abolfazl.j.dev@gmail.com",
@@ -29,11 +29,13 @@
   "build": {
     "appId": "com.madar.admin",
     "productName": "Madar Admin",
-    "publish": {
-      "provider": "github",
-      "owner": "abolfazlj10",
-      "repo": "panel-s-madar-admins"
-    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "abolfazlj10",
+        "repo": "panel-s-madar-admins"
+      }
+    ],
     "directories": {
       "output": "dist"
     },

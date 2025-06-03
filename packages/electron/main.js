@@ -1,6 +1,6 @@
 require('dotenv').config()
 const { app, BrowserWindow, nativeImage, protocol } = require('electron')
-import { autoUpdater } from 'electron-updater'
+const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const http = require('http')
 
