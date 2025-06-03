@@ -15,7 +15,8 @@
   "dependencies": {
     "@monorepo/web": "1.0.0",
     "dotenv": "^16.5.0",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.6.2"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
@@ -28,6 +29,11 @@
   "build": {
     "appId": "com.madar.admin",
     "productName": "Madar Admin",
+    "publish": {
+      "provider": "github",
+      "owner": "abolfazlj10",
+      "repo": "panel-s-madar-admins"
+    },
     "directories": {
       "output": "dist"
     },

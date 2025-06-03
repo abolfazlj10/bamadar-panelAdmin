@@ -1,5 +1,6 @@
 require('dotenv').config()
 const { app, BrowserWindow, nativeImage, protocol } = require('electron')
+import { autoUpdater } from 'electron-updater'
 const path = require('path')
 const http = require('http')
 
@@ -74,6 +75,7 @@ async function createWindow() {
             console.error('Error loading URL:', error);
         }
     } else {
+        autoUpdater.checkForUpdatesAndNotify()
         mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'))
     }
 
@@ -84,6 +86,10 @@ async function createWindow() {
         mainWindow = null
     })
 }
+
+autoUpdater.on('update-downloaded', () => {
+    autoUpdater.quitAndInstall()
+})
 
 app.whenReady().then(() => {
     createProtocol()

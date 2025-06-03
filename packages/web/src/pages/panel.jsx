@@ -147,7 +147,7 @@ export default function Panel () {
                         <div className="flex justify-between">
                             <div className="text-3xl border-b pb-3 border-blue-500/30">دسترسی ها</div>
                         </div>
-                        <div className="p-5 grid grid-cols-3 gap-y-8 justify-items-center mt-5 max-[2476px]:grid-cols-2 max-[1844px]:grid-cols-1">
+                        <div className="p-5 grid grid-cols-3 gap-x-2 gap-y-10 justify-items-center mt-5 max-[2476px]:grid-cols-2 max-[1844px]:grid-cols-1">
                             {access && access.map((element,key)=>(
                                 <AccessCard data={element} id={key} key={key} />
                             ))}
