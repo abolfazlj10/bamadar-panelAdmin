@@ -1,58 +1,10 @@
 require('dotenv').config()
-const { app, BrowserWindow, nativeImage, protocol, dialog } = require('electron')
-const { autoUpdater } = require('electron-updater')
+const { app, BrowserWindow, nativeImage, protocol } = require('electron')
 const path = require('path')
 const http = require('http')
 
 // Set NODE_ENV to 'development' if not set
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
-// تنظیمات اولیه auto-updater
-autoUpdater.autoDownload = true
-autoUpdater.autoInstallOnAppQuit = true
-
-// رویدادهای auto-updater
-autoUpdater.on('checking-for-update', () => {
-    console.log('در حال بررسی برای آپدیت جدید...')
-})
-
-autoUpdater.on('update-available', (info) => {
-    console.log('آپدیت جدید در دسترس است:', info)
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'به‌روزرسانی جدید',
-        message: 'نسخه جدیدی از برنامه در دسترس است. در حال دانلود...',
-        buttons: ['باشه']
-    })
-})
-
-autoUpdater.on('update-not-available', (info) => {
-    console.log('آپدیت جدیدی موجود نیست')
-})
-
-autoUpdater.on('error', (err) => {
-    console.error('خطا در به‌روزرسانی:', err)
-    dialog.showErrorBox('خطا در به‌روزرسانی', 'مشکلی در به‌روزرسانی برنامه پیش آمده است.')
-})
-
-autoUpdater.on('download-progress', (progressObj) => {
-    let message = `سرعت دانلود: ${progressObj.bytesPerSecond} - دانلود شده: ${progressObj.percent}%`
-    console.log(message)
-})
-
-autoUpdater.on('update-downloaded', (info) => {
-    console.log('آپدیت دانلود شد:', info)
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'به‌روزرسانی آماده است',
-        message: 'نسخه جدید دانلود شده است. برای نصب آن برنامه را مجدداً راه‌اندازی کنید.',
-        buttons: ['راه‌اندازی مجدد', 'بعداً']
-    }).then((returnValue) => {
-        if (returnValue.response === 0) {
-            autoUpdater.quitAndInstall()
-        }
-    })
-})
 
 let mainWindow;
 
@@ -122,10 +74,6 @@ async function createWindow() {
             console.error('Error loading URL:', error);
         }
     } else {
-        // بررسی آپدیت در حالت production
-        autoUpdater.checkForUpdates().catch(err => {
-            console.error('خطا در بررسی آپدیت:', err)
-        })
         mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'))
     }
 
