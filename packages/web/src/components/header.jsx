@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header () {
     const {userData,wrapperData,setWrapperData} = useAppContext()
     return(
-        <div className="col-span-2 grid grid-cols-3 items-center bg-[#fff] rounded-xl px-5 py-5 shadow-lg select-none m-5 overflow-hidden min-h-[120px] bg-blue-400" >
+        <div className="col-span-2 grid grid-cols-3 items-center bg-[#fff] rounded-xl px-5 py-5 shadow-lg select-none m-5 overflow-hidden min-h-[120px]" >
             <div className="flex">
                 <div className="flex text-2xl items-center gap-2 font-bold">
                     <motion.img 
