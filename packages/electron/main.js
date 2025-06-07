@@ -20,7 +20,7 @@ autoUpdater.autoInstallOnAppQuit = true
 autoUpdater.setFeedURL({
     provider: 'github',
     owner: 'abolfazlj10',
-    repo: 'testRepo',
+    repo: 'panel-s-madar-admins',
     private: false,
     releaseType: 'release'
 })
