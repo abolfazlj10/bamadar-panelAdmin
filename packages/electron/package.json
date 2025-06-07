@@ -1,6 +1,6 @@
 {
   "name": "@monorepo/electron",
-  "version": "1.0.6",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Admins Madar App",
   "author": "abolfazl.j.dev@gmail.com",
@@ -10,12 +10,19 @@
     "build": "cross-env NODE_ENV=production electron-builder",
     "build:win": "cross-env NODE_ENV=production electron-builder --win",
     "build:mac": "cross-env NODE_ENV=production electron-builder --mac",
-    "build:all": "cd ../web && yarn build && cd ../electron && yarn build:win"
+    "build:all": "cd ../web && yarn build && cd ../electron && yarn build:win",
+    "release": "electron-builder build --publish always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abolfazlj10/testRepo.git"
   },
   "dependencies": {
     "@monorepo/web": "1.0.0",
     "dotenv": "^16.5.0",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.1.7",
+    "electron-log": "^5.0.1"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
@@ -35,6 +42,7 @@
       "main.js",
       "preload.js",
       "package.json",
+      "node_modules/electron-log/**/*",
       {
         "from": "../web/dist",
         "to": "public",
@@ -47,7 +55,8 @@
       "target": [
         "nsis"
       ],
-      "icon": "public/logos/madar.ico"
+      "icon": "public/logos/madar.ico",
+      "artifactName": "Madar.Admin-Setup-${version}.exe"
     },
     "mac": {
       "target": [
@@ -55,6 +64,19 @@
         "zip"
       ],
       "icon": "public/logos/madar.icns"
+    },
+    "publish": [{
+      "provider": "github",
+      "owner": "abolfazlj10",
+      "repo": "testRepo",
+      "private": false,
+      "releaseType": "release",
+      "vPrefixedTagName": true,
+      "updaterCacheDirName": "madar-admin-updater"
+    }],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }

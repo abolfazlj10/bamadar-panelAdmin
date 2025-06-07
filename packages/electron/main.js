@@ -1,12 +1,38 @@
 require('dotenv').config()
-const { app, BrowserWindow, nativeImage, protocol } = require('electron')
+const { app, BrowserWindow, nativeImage, protocol, dialog } = require('electron')
+const { autoUpdater, AppUpdater } = require('electron-updater')
 const path = require('path')
 const http = require('http')
+const log = require('electron-log')
 
 // Set NODE_ENV to 'development' if not set
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 let mainWindow;
+
+// Configure logging
+log.transports.file.level = "debug"
+autoUpdater.logger = log
+
+// Configure updater
+autoUpdater.autoDownload = true
+autoUpdater.autoInstallOnAppQuit = true
+autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'abolfazlj10',
+    repo: 'testRepo',
+    private: false,
+    releaseType: 'release'
+})
+
+// Log important update-related events
+autoUpdater.on('download-progress', (progressObj) => {
+    log.info('Download progress:', progressObj)
+})
+
+autoUpdater.on('error', (error) => {
+    log.error('Error in auto-updater:', error)
+})
 
 function waitForViteServer(url, retries = 10, interval = 1000) {
     return new Promise((resolve, reject) => {
@@ -55,7 +81,7 @@ async function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
-            webSecurity: false // این گزینه برای تست است، در محیط production باید false باشد
+            webSecurity: false
         },
         icon: path.join(__dirname, 'public', 'logos', 'madar.png')
     })
@@ -88,6 +114,61 @@ async function createWindow() {
 app.whenReady().then(() => {
     createProtocol()
     createWindow()
+    autoUpdater.checkForUpdates()
+})
+
+
+autoUpdater.on('checking-for-update', () => {
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Madar Admin',
+        message: 'Checking for updates...',
+        detail: 'Please wait while we check for updates.',
+    })
+})
+
+autoUpdater.on('update-not-available', () => {
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Madar Admin',
+        message: 'You are using the latest version of Madar Admin',
+        detail: 'No updates available at this time.',
+    })
+})
+
+autoUpdater.on('update-available', (info) => {
+    const version = info && info.version ? ` (${info.version})` : '';
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Madar Admin',
+        message: `Update available${version}`,
+        detail: 'A new version of Madar Admin is available. The download will begin automatically.',
+    })
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+    const version = info && info.version ? ` (${info.version})` : '';
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Madar Admin',
+        message: `Update downloaded${version}`,
+        detail: 'The update has been downloaded. Would you like to install it now? The application will restart.',
+        buttons: ['Install and Restart', 'Later'],
+        defaultId: 0
+    }).then((result) => {
+        if (result.response === 0) {
+            autoUpdater.quitAndInstall(false, true);
+        }
+    });
+})
+
+autoUpdater.on('error', (error) => {
+    dialog.showMessageBox({
+        type: 'error',
+        title: 'Madar Admin',
+        message: 'Update Error',
+        detail: error ? error.message || error.toString() : 'An unknown error occurred while checking for updates.',
+    })
 })
 
 // macOS
