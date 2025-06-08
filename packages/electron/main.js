@@ -117,55 +117,24 @@ app.whenReady().then(() => {
     autoUpdater.checkForUpdates()
 })
 
-
-autoUpdater.on('checking-for-update', () => {
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'Madar Admin',
-        message: 'Checking for updates...',
-        detail: 'Please wait while we check for updates.',
-    })
-})
-
-autoUpdater.on('update-not-available', () => {
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'Madar Admin',
-        message: 'You are using the latest version of Madar Admin',
-        detail: 'No updates available at this time.',
-    })
-})
-
-autoUpdater.on('update-available', (info) => {
-    const version = info && info.version ? ` (${info.version})` : '';
-    dialog.showMessageBox({
-        type: 'info',
-        title: 'Madar Admin',
-        message: `Update available${version}`,
-        detail: 'A new version of Madar Admin is available. The download will begin automatically.',
-    })
-})
-
 autoUpdater.on('update-downloaded', (info) => {
-    const version = info && info.version ? ` (${info.version})` : '';
     dialog.showMessageBox({
         type: 'info',
-        title: 'Madar Admin',
-        message: `Update downloaded${version}`,
-        detail: 'The update has been downloaded. Would you like to install it now? The application will restart.',
-        buttons: ['Install and Restart', 'Later'],
-        defaultId: 0
-    }).then((result) => {
-        if (result.response === 0) {
-            autoUpdater.quitAndInstall(false, true);
-        }
+        title: 'به‌روزرسانی جدید',
+        message: 'نسخه جدید دانلود شد',
+        detail: 'برنامه در حال به‌روزرسانی است و به صورت خودکار مجدداً اجرا خواهد شد.',
+        buttons: ['باشه'],
+        defaultId: 0,
+        noLink: true
+    }).then(() => {
+        autoUpdater.quitAndInstall(false, true);
     });
 })
 
 autoUpdater.on('error', (error) => {
     dialog.showMessageBox({
         type: 'error',
-        title: 'Madar Admin',
+        title: 'panel admin',
         message: 'Update Error',
         detail: error ? error.message || error.toString() : 'An unknown error occurred while checking for updates.',
     })
