@@ -43,7 +43,7 @@ export default function Header () {
                     <motion.img 
                         layoutId={`icon-${wrapperData?.id}`}
                         className="max-h-[70px] object-contain z-[99]" 
-                        src={wrapperData.title === 'میزیتو' ? `/logos/mizito.webp` : `https://basesuperapp.bamadar.com/v1/media/${wrapperData?.image}`}
+                        src={wrapperData.title === 'میزیتو' ? `./logos/mizito.webp` : `https://basesuperapp.bamadar.com/v1/media/${wrapperData?.image}`}
                         transition={{ 
                             type: "spring",
                             stiffness: 300,
