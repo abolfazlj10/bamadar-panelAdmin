@@ -27,20 +27,17 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
-    "dmg-builder": "26.0.12",
     "electron": "36.2.1",
-    "electron-builder": "^26.0.12",
-    "electron-builder-squirrel-windows": "26.0.12"
+    "electron-builder": "^26.0.12"
   },
   "build": {
     "appId": "com.madar.admin",
-    "productName": "Madar Admin",
+    "productName": "panel admin",
     "directories": {
       "output": "dist"
     },
     "files": [
       "main.js",
-      "preload.js",
       "package.json",
       "node_modules/electron-log/**/*",
       {
@@ -75,8 +72,12 @@
       "updaterCacheDirName": "madar-admin-updater"
     }],
     "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "perMachine": false
     }
   }
 }
