@@ -1,11 +1,12 @@
 import { useAppContext } from "../context/appContext";
 import { motion } from "framer-motion";
+import { FaArrowLeft } from "react-icons/fa6";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function Header () {
     const {userData,wrapperData,setWrapperData} = useAppContext()
     return(
-        <div className="col-span-2 grid grid-cols-3 items-center rounded-xl px-5 py-5 shadow-lg select-none m-5 overflow-hidden min-h-[120px]" >
+        <div className="col-span-2 bg-[#fff] grid grid-cols-3 items-center rounded-xl p-6 shadow-lg select-none m-5 overflow-hidden min-h-[120px]" >
             <div className="flex">
                 <div className="flex text-2xl items-center gap-2 font-bold">
                     <motion.img 
@@ -31,7 +32,7 @@ export default function Header () {
                                 transition={{duration:0.1}}
                                 className="flex items-center gap-2"
                             >
-                                <span>/</span>
+                                <span><FaArrowLeft /></span>
                                 <Link to={`/wrapper`} className="hover:text-blue-500 duration-75 hover:underline">{wrapperData.title}</Link>
                             </motion.div>
                         )}

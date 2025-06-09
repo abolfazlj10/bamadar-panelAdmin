@@ -12,7 +12,7 @@ export default function AccessCard ({data,id}) {
     return (
         <motion.div
         onClick={goToWrapper}
-        className="h-[500px] w-[600px] cursor-pointer bg-gradient-to-br to-purple-600 from-blue-600 shadow-xl grid grid-rows-[8fr_1fr] rounded-xl p-5 text-center border duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-500">
+        className="h-[490px] w-[600px] cursor-pointer bg-gradient-to-br from-[#f9f9f9] to-[#fff] shadow-lg grid grid-rows-[8fr_1fr] rounded-3xl p-10 text-center border duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-500">
             <div className="flex justify-center items-center">
                 <motion.img 
                     layoutId={`icon-${data.id}`} 
@@ -25,8 +25,8 @@ export default function AccessCard ({data,id}) {
                     }}
                 />
             </div>
-            <div className="flex gap-5 justify-end items-center">
-                <div className="font-bold text-white text-[35px]">{data.title}</div>
+            <div className="flex justify-center items-center">
+                <div className="font-bold text-[35px]">{data.title}</div>
             </div>
         </motion.div>
     )
