@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState} from 'react'
 import { motion } from 'framer-motion'
-import { useAppContext } from '../context/appContext'
+import { useAppContext } from '../hooks/appContext'
 import { PiWarningOctagon } from "react-icons/pi";
 
 export default function PhoneNumberLogin ({onChangeMode}) {

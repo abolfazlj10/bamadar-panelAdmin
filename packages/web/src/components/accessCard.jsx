@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useAppContext } from "../context/appContext";
+import { useAppContext } from "../hooks/appContext";
 export default function AccessCard ({data,id}) {
     const navigate = useNavigate()
     const {setWrapperData} = useAppContext()

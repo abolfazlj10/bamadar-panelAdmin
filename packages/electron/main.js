@@ -96,7 +96,6 @@ async function createWindow() {
             await waitForViteServer('http://localhost:5173');
             await mainWindow.loadURL('http://localhost:5173');
         } catch (error) {
-            mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'))
             console.error('Error loading URL:', error);
         }
     } else {

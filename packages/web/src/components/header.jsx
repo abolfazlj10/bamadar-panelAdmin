@@ -1,4 +1,4 @@
-import { useAppContext } from "../context/appContext";
+import { useAppContext } from "../hooks/appContext";
 import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useEffect } from "react";

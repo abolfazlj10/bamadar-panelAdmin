@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAppContext } from "../context/appContext"
+import { useAppContext } from "../hooks/appContext"
 import { PiUserLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom"
 import AccessCard from "../components/accessCard"

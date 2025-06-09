@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { useAppContext } from '../context/appContext';
+import { useAppContext } from '../hooks/appContext';
 import { useNavigate } from 'react-router-dom';
 import { BsClock } from "react-icons/bs";
 

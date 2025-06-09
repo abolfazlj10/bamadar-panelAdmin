@@ -3,7 +3,7 @@ import Login from './pages/Login'
 import Panel from './pages/panel'
 import Wrapper from './pages/wapper'
 import { ToastContainer } from 'react-toastify'
-import { AppProvider } from './context/appContext'
+import { AppProvider } from './hooks/appContext'
 
 export default function App() {
   return (

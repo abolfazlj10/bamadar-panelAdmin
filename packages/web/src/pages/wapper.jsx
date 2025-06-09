@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Header from "../components/header";
-import { useAppContext } from "../context/appContext";  
+import { useAppContext } from "../hooks/appContext";  
 import { useNavigate } from "react-router-dom";
 export default function Wrapper () {
     const {wrapperData,useToastifyCoustom} = useAppContext()
